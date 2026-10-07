@@ -54,7 +54,7 @@ env:
   KERNELSU_SUS_PATCH: "false"
 
   PATCHES_SOURCE: "cyberc3dr/NonGKI_Kernel_Patches"
-  PATCHES_BRANCH: "common-4.19"
+  PATCHES_BRANCH: "main"
 
   SUSFS_FOLDER_FIXED: ""
   SUSFS_PATCH_FIXED: ""
