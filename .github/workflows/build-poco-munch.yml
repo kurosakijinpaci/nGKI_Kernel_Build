@@ -53,7 +53,7 @@ env:
   KERNELSU_METHOD: "shell"
   KERNELSU_SUS_PATCH: "false"
 
-  PATCHES_SOURCE: "sidex15/kernel_patches"
+  PATCHES_SOURCE: "gooder123/NonGKI_Patcher"
   PATCHES_BRANCH: "main"
 
   SUSFS_FOLDER_FIXED: ""
