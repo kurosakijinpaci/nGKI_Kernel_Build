@@ -13,6 +13,7 @@ jobs:
       DEVICE_CODENAME: "munch"
       OS_VERSION: "14"
       ANDROID_VERSION: "14"
+      KERNEL_PATH: "device_kernel"
       
       # Sumber kernel POCO F4
       KERNEL_SOURCE: "https://github.com/munch-devs/android_kernel_xiaomi_munch"
