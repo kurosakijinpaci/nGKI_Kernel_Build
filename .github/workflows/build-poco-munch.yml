@@ -1,0 +1,44 @@
+name: Build POCO F4 Munch KernelSU + SuSFS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Kernel
+    runs-on: ubuntu-latest
+    
+    env:
+      DEVICE_NAME: "xiaomi"
+      DEVICE_CODENAME: "munch"
+      OS_VERSION: "14"
+      ANDROID_VERSION: "14"
+
+      # Sumber kernel POCO F4
+      KERNEL_SOURCE: "https://github.com/munch-devs/android_kernel_xiaomi_munch"
+      KERNEL_BRANCH: "main"
+      KERNEL_CONFIG: "munch_defconfig"
+      
+      # Konfigurasi Toolchain & Clang
+      CLANG_SOURCE: "https://github.com/UndeadSegment/llvm-stable"
+      CLANG_BRANCH: "main"
+      GCC_GNU: false
+      
+      # Fitur Tambahan (KernelSU & SuSFS)
+      ENABLE_KSU: true
+      KSU_VARIANT: "sukisu-ultra"
+      KSU_REF: "main"
+      ENABLE_SUSFS: true
+      SUSFS_BRANCH: "kernel-4.19"
+      
+      # Output
+      BUILD_BOOT_IMG: false
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Run Build Process
+        uses: ./.github/workflows/build-process
+        with:
+          device: ${{ env.DEVICE_CODENAME }}
