@@ -53,8 +53,8 @@ env:
   KERNELSU_METHOD: "shell"
   KERNELSU_SUS_PATCH: "false"
 
-  PATCHES_SOURCE: "cyberc3dr/NonGKI_Kernel_Patches"
-  PATCHES_BRANCH: "main"
+  PATCHES_SOURCE: ""
+  PATCHES_BRANCH: ""
 
   SUSFS_FOLDER_FIXED: ""
   SUSFS_PATCH_FIXED: ""
