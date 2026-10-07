@@ -61,7 +61,7 @@ env:
 
   REKERNEL_ENABLE: "false"
   DROIDSPACES_ENABLE: "false"
-  NOMOUNT_ENABLE: "false"
+  NOMOUNT_ENABLE: "true"
   VPNHIDE_ENABLE: "false"
 
   HOOK_METHOD: "branchlink"
