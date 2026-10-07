@@ -13,7 +13,7 @@ jobs:
       DEVICE_CODENAME: "munch"
       OS_VERSION: "14"
       ANDROID_VERSION: "14"
-
+      
       # Sumber kernel POCO F4
       KERNEL_SOURCE: "https://github.com/munch-devs/android_kernel_xiaomi_munch"
       KERNEL_BRANCH: "main"
@@ -40,5 +40,3 @@ jobs:
 
       - name: Run Build Process
         uses: ./.github/workflows/build-process
-        with:
-          device: ${{ env.DEVICE_CODENAME }}
