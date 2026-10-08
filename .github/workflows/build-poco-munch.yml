@@ -9,10 +9,10 @@ env:
   DEVICE_NAME: "xiaomi"
   DEVICE_CODENAME: "munch"
 
-  CUSTOM_CMDS: "CROSS_COMPILE=aarch64-linux-gnu- CLANG_TRIPLE=aarch64-linux-gnu-"
+  CUSTOM_CMDS: "CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnueabi-"
   EXTRA_CMDS: "LLVM=1 LLVM_IAS=1"
 
-  KERNEL_SOURCE: "https://github.com/munch-devs/android_kernel_xiaomi_munch"
+  KERNEL_SOURCE: "https://github.com/munch-devs/kernel_xiaomi_munch"
   KERNEL_BRANCH: "main"
 
   CLANG_SOURCE: "https://github.com/bachnxuan/aosp_clang_mirror/releases/download/clang-r563880c-13989888/clang-r563880c.tar.gz"
@@ -25,26 +25,6 @@ env:
   DEFCONFIG_ORIGIN_IMAGE: ""
   DEFCONFIG_FROM_BOOT: false
 
-  KERNELSU_SOURCE: ""
-  KERNELSU_BRANCH: ""
-
-  KERNELSU_AUTO_GET: "true"
-  KERNELSU_AUTO_FORK: "xxksu"
-
-  SUSFS_ENABLE: true
-  SUSFS_FIXED: true
-
-  AK3_SOURCE: "https://github.com/osm0sis/AnyKernel3.git"
-  AK3_BRANCH: "master"
-
-  BOOT_SOURCE: ""
-
-  NEED_DTBO: false
-  NEED_SAFE_DTBO: false
-
-  ROM_TEXT: "evolutionx_a16"
-
-  # Other env
   PYTHON_VERSION: "3"
 
   PACK_METHOD: "AnyKernel3"
@@ -53,8 +33,8 @@ env:
   KERNELSU_METHOD: "shell"
   KERNELSU_SUS_PATCH: "false"
 
-  PATCHES_SOURCE: "gooder123/NonGKI_Patcher"
-  PATCHES_BRANCH: "main"
+  PATCHES_SOURCE: ""
+  PATCHES_BRANCH: ""
 
   SUSFS_FOLDER_FIXED: ""
   SUSFS_PATCH_FIXED: ""
@@ -70,69 +50,3 @@ env:
   KPM_ENABLE: "false"
   KPM_INLINE: "false"
   KPM_KPATCH_NEXT: "false"
-  KPM_PATCH_SOURCE: ""
-
-  BASEBAND_GUARD_ENABLE: "true"
-  BASEBAND_GUARD_BOOT: "false"
-
-  GENERATE_DTB: "false"
-  GENERATE_CHIP: "qcom"
-  CUSTOM_DTB: "false"
-  DTB_NAME: ""
-
-  BUILD_DEBUGGER: "false"
-  SKIP_PATCH: "false"
-
-  BUILD_OTHER_CONFIG: "false"
-  MERGE_CONFIG_FILES: ""
-
-  FREE_MORE_SPACE: "false"
-
-jobs:
-  build-kernel:
-    name: POCO F4 Munch KernelSU + SuSFS
-    runs-on: ubuntu-24.04
-    env:
-      CCACHE_COMPILERCHECK: "%compiler% -dumpmachine; %compiler% -dumpversion"
-      CCACHE_NOHASHDIR: "true"
-      CCACHE_HARDLINK: "true"
-
-    steps:
-      - name: ⏰ Checkout repository
-        uses: actions/checkout@v6
-
-      - name: ⌛️ Compilation environment preparation
-        uses: ./.github/workflows/build-env
-
-      - name: ⚙️ Get necessary tools
-        uses: ./.github/workflows/build-ready
-
-      - name: 🪝 Patch Kernel of SUSFS
-        uses: ./.github/workflows/patch-susfs
-
-      - name: 🔗 Patch for no-kprobe
-        uses: ./.github/workflows/patch-no-kprobe
-
-      - name: 🧰 Patch Kernel of Re:Kernel
-        uses: ./.github/workflows/patch-rekernel
-
-      - name: 💿 Patch Kernel of Droidspaces
-        uses: ./.github/workflows/patch-droidspaces
-
-      - name: 🛡 Patch Kernel of VPNHide
-        uses: ./.github/workflows/patch-vpnhide
-
-      - name: 🔒 Patch Kernel of Baseband Guard
-        uses: ./.github/workflows/patch-baseband-guard
-
-      - name: 🛡️ Patch Kernel of NoMount
-        uses: ./.github/workflows/patch-nomount
-
-      - name: 🚀 Build Process
-        uses: ./.github/workflows/build-process
-
-      - name: 🔩 Pack Process
-        uses: ./.github/workflows/pack-process
-
-      - name: ✏️ Upload Artifacts
-        uses: ./.github/workflows/upload-files
